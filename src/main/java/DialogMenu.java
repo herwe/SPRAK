@@ -11,14 +11,27 @@ public class DialogMenu {
     }
 
     private void menuLoop() {
-        while (true) {
+        boolean exit = false;
+        while (!exit) {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
                     "2. Hur spelar man?" + "\n" +
                     "3. Lägg till ord" + "\n" +
                     "0. Avsluta");
-            if (input() == 0){
-                break;
+            switch (input()){
+                case 0:
+                    //Avsluta
+                    exit = true;
+                    break;
+                case 1:
+                    //Spela
+                    break;
+                case 2:
+                    //Hur spelar man?
+                    break;
+                case 3:
+                    //Lägg till ord
+                    break;
             }
         }
     }
@@ -38,7 +51,6 @@ public class DialogMenu {
         int menuChoice;
         try {
             menuChoice = Integer.parseInt(rawInput.substring(0, 1));
-            System.out.println("menuCoice: " + menuChoice);
             if (!Arrays.asList(ALLOWED_INPUT).contains(menuChoice)) {
                 throw new Exception();
             }

@@ -3,24 +3,42 @@ import java.io.*;
 import java.io.FileWriter;
 
 public class JsonTagger {
-    public JsonTagger() throws Exception {
-        URL url = new URL("https://json-tagger.com/tag");
-        String text = "Mitt namn är Johan.";
-        text = text.toLowerCase();
+    private BufferedReader reader;
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
+    public JsonTagger() {
+        setupTagger();
+        createJsonFile();
+    }
 
-        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-        wr.write(text.getBytes());
+    public void setupTagger() {
+        try {
+            URL url = new URL("https://json-tagger.com/tag");
+            String text = "Mitt namn är Johan.";
+            text = text.toLowerCase();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String output;
-        try (Writer json = new FileWriter("data.json")) {
-            while ((output = reader.readLine()) != null) {
-                json.write(output);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+            wr.write(text.getBytes());
+
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createJsonFile() {
+        try {
+            String output;
+            try (Writer json = new FileWriter("data.json")) {
+                while ((output = reader.readLine()) != null) {
+                    json.write(output);
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

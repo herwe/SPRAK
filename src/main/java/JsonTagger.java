@@ -5,32 +5,40 @@ import java.io.FileWriter;
 public class JsonTagger {
     private BufferedReader reader;
 
-    public JsonTagger() throws IOException {
+    public JsonTagger() {
         setupTagger();
         createJsonFile();
     }
 
-    public void setupTagger() throws IOException {
-        URL url = new URL("https://json-tagger.com/tag");
-        String text = "Mitt namn är Johan.";
-        text = text.toLowerCase();
+    public void setupTagger() {
+        try {
+            URL url = new URL("https://json-tagger.com/tag");
+            String text = "Mitt namn är Johan.";
+            text = text.toLowerCase();
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setDoOutput(true);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
 
-        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.write(text.getBytes());
+            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+            wr.write(text.getBytes());
 
-        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void createJsonFile() throws IOException {
-        String output;
-        try (Writer json = new FileWriter("data.json")) {
-            while ((output = reader.readLine()) != null) {
-                json.write(output);
+    public void createJsonFile() {
+        try {
+            String output;
+            try (Writer json = new FileWriter("data.json")) {
+                while ((output = reader.readLine()) != null) {
+                    json.write(output);
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

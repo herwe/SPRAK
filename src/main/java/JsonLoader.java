@@ -1,6 +1,6 @@
 public class JsonLoader {
-    public static void start () throws Exception {
-        JsonTagger tagger = new JsonTagger();
-        JsonReader reader = new JsonReader();
+    public static void start () {
+        new JsonTagger();
+        new JsonReader();
     }
 }

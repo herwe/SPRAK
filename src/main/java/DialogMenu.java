@@ -2,15 +2,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DialogMenu {
-    private Scanner scanner;
-
-    public DialogMenu() {
-        scanner = new Scanner(System.in);
-    }
-
     private void menuLoop() {
         boolean exit = false;
-        int[] allowedInput = {1, 2, 3, 0};
+        Integer[] allowedInput = {1, 2, 3, 0};
         while (!exit) {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
@@ -42,20 +36,20 @@ public class DialogMenu {
      * Asks user for input and validates it.
      *
      * @param allowedInput Specifies valid input.
-     * @return -1 for invalid choice, 0-3 for valid choices
+     * @return -1 for invalid choice. Returns inputted number if it is allowedInput.
      */
-    private int numericInput(int[] allowedInput) {
+    private int numericInput(Integer[] allowedInput) {
+        Scanner scanner = new Scanner(System.in);
         int menuChoice;
         try {
             System.out.print("> ");
             menuChoice = scanner.nextInt();
             if (!Arrays.asList(allowedInput).contains(menuChoice)) {
-                throw new Exception();
+                throw new Exception("Input is not in allowedInput");
             }
         } catch (Exception e) {
             return -1;
         }
-
         return menuChoice;
     }
 

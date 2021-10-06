@@ -54,8 +54,9 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) throws Exception {
-       DialogMenu dialogMenu = new DialogMenu();
-       dialogMenu.menuLoop();
+        JsonLoader.start();
+        DialogMenu dialogMenu = new DialogMenu();
+        dialogMenu.menuLoop();
     }
 
 }

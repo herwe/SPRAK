@@ -3,19 +3,29 @@ import java.io.*;
 import java.io.FileWriter;
 
 public class JsonTagger {
-    public JsonTagger() throws Exception {
+    private BufferedReader reader;
+
+    public JsonTagger() throws IOException {
+        setupTagger();
+        createJsonFile();
+    }
+
+    public void setupTagger() throws IOException {
         URL url = new URL("https://json-tagger.com/tag");
         String text = "Mitt namn är Johan.";
         text = text.toLowerCase();
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
 
-        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
         wr.write(text.getBytes());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    }
+
+    public void createJsonFile() throws IOException {
         String output;
         try (Writer json = new FileWriter("data.json")) {
             while ((output = reader.readLine()) != null) {

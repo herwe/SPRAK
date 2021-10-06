@@ -1,10 +1,8 @@
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class DialogMenu {
     private Scanner scanner;
-    private static Integer[] ALLOWED_INPUT = {1, 2, 3, 0};
 
     public DialogMenu() {
         scanner = new Scanner(System.in);
@@ -12,13 +10,17 @@ public class DialogMenu {
 
     private void menuLoop() {
         boolean exit = false;
+        int[] allowedInput = {1, 2, 3, 0};
         while (!exit) {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
                     "2. Hur spelar man?" + "\n" +
                     "3. Lägg till ord" + "\n" +
                     "0. Avsluta");
-            switch (input()){
+            switch (numericInput(allowedInput)) {
+                case -1:
+                    System.out.println("Ogiltigt alternativ, försök igen.");
+                    break;
                 case 0:
                     //Avsluta
                     exit = true;
@@ -39,23 +41,18 @@ public class DialogMenu {
     /**
      * Asks user for input and validates it.
      *
-     * @return -1 for invalid choice, 0-4 for valid choices
+     * @param allowedInput Specifies valid input.
+     * @return -1 for invalid choice, 0-3 for valid choices
      */
-    private int input() {
-        System.out.print("> ");
-        String rawInput = scanner.nextLine();
-        if (rawInput.isBlank()) {
-            System.out.println("Välj ett menyval.");
-            return -1;
-        }
+    private int numericInput(int[] allowedInput) {
         int menuChoice;
         try {
-            menuChoice = Integer.parseInt(rawInput.substring(0, 1));
-            if (!Arrays.asList(ALLOWED_INPUT).contains(menuChoice)) {
+            System.out.print("> ");
+            menuChoice = scanner.nextInt();
+            if (!Arrays.asList(allowedInput).contains(menuChoice)) {
                 throw new Exception();
             }
         } catch (Exception e) {
-            System.out.println("Ogiltigt alternativ, försök igen.");
             return -1;
         }
 

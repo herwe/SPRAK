@@ -50,7 +50,7 @@ public class DialogMenu {
         }
         int menuChoice;
         try {
-            menuChoice = Integer.parseInt(rawInput.substring(0, 1));
+            menuChoice = Integer.parseInt(rawInput);
             if (!Arrays.asList(ALLOWED_INPUT).contains(menuChoice)) {
                 throw new Exception();
             }

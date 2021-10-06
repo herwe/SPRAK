@@ -10,14 +10,16 @@ public class DialogMenu {
         scanner = new Scanner(System.in);
     }
 
-    public void menuLoop() {
+    private void menuLoop() {
         while (true) {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
                     "2. Hur spelar man?" + "\n" +
                     "3. Lägg till ord" + "\n" +
                     "0. Avsluta");
-            break;
+            if (input() == 0){
+                break;
+            }
         }
     }
 
@@ -35,7 +37,8 @@ public class DialogMenu {
         }
         int menuChoice;
         try {
-            menuChoice = Integer.parseInt(rawInput.substring(0, 0));
+            menuChoice = Integer.parseInt(rawInput.substring(0, 1));
+            System.out.println("menuCoice: " + menuChoice);
             if (!Arrays.asList(ALLOWED_INPUT).contains(menuChoice)) {
                 throw new Exception();
             }
@@ -46,4 +49,10 @@ public class DialogMenu {
 
         return menuChoice;
     }
+
+    public static void main(String[] args) {
+        DialogMenu dialogMenu = new DialogMenu();
+        dialogMenu.menuLoop();
+    }
+
 }

@@ -22,6 +22,9 @@ public class JsonReader {
 
 
     public JsonReader(String str, String word) {
+        word = word.toLowerCase();
+        str = str.toLowerCase();
+
         str = str.replaceAll("[\\!\\.\\,\\?]", ""); // Strips the String of !?., characters
         parser = new JSONParser();
         try (Reader JsonReader = new FileReader("data.json")) {

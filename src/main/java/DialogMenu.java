@@ -54,7 +54,8 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        JsonLoader.start();
+        //JsonLoader.start("Jag spelar fotboll men bara kvällstid", "spelar");  // Oracle
+
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();
     }

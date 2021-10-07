@@ -54,7 +54,7 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        // JsonLoader.start("Jag spelar fotboll men bara kvällstid.", "kvÄLlsTiD");  // Oracle
+        JsonLoader.start("Nu hoppas jag att allt funkar även med versaler i ordet!", "ordet");  // Oracle
 
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();

@@ -5,23 +5,22 @@ import java.io.FileWriter;
 public class JsonTagger {
     private BufferedReader reader;
 
-    public JsonTagger() {
-        setupTagger();
+    public JsonTagger(String str) {
+        setupTagger(str);
         createJsonFile();
     }
 
-    public void setupTagger() {
+    public void setupTagger(String str) {
         try {
             URL url = new URL("https://json-tagger.com/tag");
-            String text = "Mitt namn är Johan.";
-            text = text.toLowerCase();
+            str = str.toLowerCase();
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.write(text.getBytes());
+            wr.write(str.getBytes());
 
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         } catch (IOException e) {

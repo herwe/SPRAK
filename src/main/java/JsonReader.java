@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JsonReader {
-    private JSONParser parser;
     private String word_form;
     private String lemma;
     private String pos_tag;
@@ -26,7 +25,7 @@ public class JsonReader {
         str = str.toLowerCase();
 
         str = str.replaceAll("[\\!\\.\\,\\?]", ""); // Strips the String of !?., characters
-        parser = new JSONParser();
+        JSONParser parser = new JSONParser();
         try (Reader JsonReader = new FileReader("data.json")) {
             JSONObject jsonObject = (JSONObject) parser.parse(JsonReader);
 

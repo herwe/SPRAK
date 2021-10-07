@@ -6,25 +6,21 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JsonReader {
     private String word_form;
     private String lemma;
-    private String pos_tag;
-    private String _case;
-    private String definite;
-    private String gender;
-    private String number;
-
+    private Object[] features_keys = null;
+    private Object[] features_values = null;
 
     public JsonReader(String str, String word) {
         word = word.toLowerCase();
         str = str.toLowerCase();
 
-        str = str.replaceAll("[\\!\\.\\,\\?]", ""); // Strips the String of !?., characters
+        str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
         JSONParser parser = new JSONParser();
         try (Reader JsonReader = new FileReader("data.json")) {
             JSONObject jsonObject = (JSONObject) parser.parse(JsonReader);
@@ -37,9 +33,9 @@ public class JsonReader {
             }
 
             int index = findIndex(str, word);
-            setupToString(innerArray, index);
 
-            System.out.println(this.toString());
+            setupToString(innerArray, index);
+            System.out.println(this.toString()); // Temp line (?)
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
@@ -68,23 +64,33 @@ public class JsonReader {
         word_form = (String) obj.get("word_form");
         lemma = (String) obj.get("lemma");
         JSONObject ud_tags = (JSONObject) obj.get("ud_tags");
-        pos_tag = (String) ud_tags.get("pos_tag");
         JSONObject features = (JSONObject) ud_tags.get("features");
-        _case = (String) features.get("Case");
-        definite = (String) features.get("Definite");
-        gender = (String) features.get("Gender");
-        number = (String) features.get("Number");
+
+        setupFeatureObject(features);
+    }
+
+    private void setupFeatureObject(JSONObject features) {
+        try {
+            features_keys = features.keySet().toArray();
+            features_values = features.values().toArray();
+        } catch (NullPointerException e) {
+            features_keys = new Object[1];
+            features_values = new Object[1];
+            features_keys[0] = "features";
+            features_values[0] = "null";
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("""
-                 word_form: %s\s
-                 lemma: %s\s
-                 pos_tag: %s\s
-                 case: %s\s
-                 definite: %s\s
-                 gender: %s\s
-                 number: %s""", word_form, lemma, pos_tag, _case, definite, gender, number);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("word_form: ").append(word_form).append("\n").append("lemma: ").append(lemma).append("\n");
+
+        for (int i = features_keys.length - 1; i >= 0; i--) {
+            stringBuilder.append(features_keys[i].toString().toLowerCase())
+                    .append(": ").append(features_values[i].toString().toLowerCase()).append("\n");
+        }
+
+        return stringBuilder.toString();
     }
 }

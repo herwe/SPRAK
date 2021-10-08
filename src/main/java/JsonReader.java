@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class JsonReader {
     private String word_form;
     private String lemma;
+    private String pos_tag;
     private Object[] features_keys = null;
     private Object[] features_values = null;
 
@@ -64,6 +65,7 @@ public class JsonReader {
         word_form = (String) obj.get("word_form");
         lemma = (String) obj.get("lemma");
         JSONObject ud_tags = (JSONObject) obj.get("ud_tags");
+        pos_tag = (String) ud_tags.get("pos_tag").toString().toLowerCase();
         JSONObject features = (JSONObject) ud_tags.get("features");
 
         setupFeatureObject(features);
@@ -84,7 +86,9 @@ public class JsonReader {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("word_form: ").append(word_form).append("\n").append("lemma: ").append(lemma).append("\n");
+        stringBuilder.append("word_form: ").append(word_form).append("\n")
+                .append("lemma: ").append(lemma).append("\n")
+                .append("pos_tag: ").append(pos_tag).append("\n");
 
         for (int i = features_keys.length - 1; i >= 0; i--) {
             stringBuilder.append(features_keys[i].toString().toLowerCase())

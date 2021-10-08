@@ -16,33 +16,50 @@ public class JsonReader {
     private String pos_tag;
     private Object[] features_keys = null;
     private Object[] features_values = null;
+    private JSONArray innerArray = null;
 
     public JsonReader(String str, String word) {
         word = word.toLowerCase();
         str = str.toLowerCase();
-
         str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
-        JSONParser parser = new JSONParser();
+
+        parseJson(str, word);
+        int index = findIndex(str, word);
+        setupToString(innerArray, index);
+        System.out.println(this.toString()); // Temp line (?)
+    }
+
+    /**
+     * Set ups innerArray to contain all the JSON-information.
+     *
+     * @param str The given sentence.
+     * @param word The given word to be checked for in the sentence.
+     */
+    private void parseJson(String str, String word) {
         try (Reader JsonReader = new FileReader("data.json")) {
+            JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(JsonReader);
 
             JSONArray outerArray = (JSONArray) jsonObject.get("sentences");
-            JSONArray innerArray = (JSONArray) outerArray.get(0);
+            innerArray = (JSONArray) outerArray.get(0);
 
             if (!containsWord(str, word)) {
                 throw new IllegalStateException("Sentence does not contain word");
             }
-
-            int index = findIndex(str, word);
-
-            setupToString(innerArray, index);
-            System.out.println(this.toString()); // Temp line (?)
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Checks if word is present in the given sentence.
+     * Returns true if it is, false if not.
+     *
+     * @param str The given sentence.
+     * @param word The word to be checked for in the sentence.
+     * @return results of regular expression
+     */
     private boolean containsWord(String str, String word) {
         String regex = "\\b" + word + "\\b";
         Pattern pattern = Pattern.compile(regex);
@@ -50,6 +67,14 @@ public class JsonReader {
         return matcher.find();
     }
 
+    /**
+     * Checks which index the word in the sentence is located at.
+     *
+     * @exception IllegalStateException if word is not contained in string
+     * @param str The sentence to be tokenized.
+     * @param word The word to check for index in tokenized string.
+     * @return the index where word is located in the string.
+     */
     private int findIndex(String str, String word) {
         StringTokenizer stringTokenizer = new StringTokenizer(str);
         for (int i = 1; stringTokenizer.hasMoreTokens(); i++) {
@@ -60,6 +85,12 @@ public class JsonReader {
         throw new IllegalStateException("This should not happen");
     }
 
+    /**
+     * Assigns instance variable the current states from the given word.
+     *
+     * @param innerArray array containing information about all the JSON objects.
+     * @param arrayIndex index where the current word is located at as an JSON object in the innerArray.
+     */
     private void setupToString(JSONArray innerArray, int arrayIndex) {
         JSONObject obj = (JSONObject) innerArray.get(arrayIndex);
         word_form = (String) obj.get("word_form");
@@ -71,6 +102,13 @@ public class JsonReader {
         setupFeatureObject(features);
     }
 
+    /**
+     * Assigns the current words features which is a key and value pair to the instance variables.
+     * If the current word does not have any features, assign key as "features" and value as "null".
+     *
+     * @exception NullPointerException if the word does not have any features.
+     * @param features JSONObject containing the features of the current word.
+     */
     private void setupFeatureObject(JSONObject features) {
         try {
             features_keys = features.keySet().toArray();

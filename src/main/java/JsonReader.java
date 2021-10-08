@@ -16,27 +16,30 @@ public class JsonReader {
     private String pos_tag;
     private Object[] features_keys = null;
     private Object[] features_values = null;
+    private JSONArray innerArray = null;
 
     public JsonReader(String str, String word) {
         word = word.toLowerCase();
         str = str.toLowerCase();
-
         str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
-        JSONParser parser = new JSONParser();
+
+        parseJson(str, word);
+        int index = findIndex(str, word);
+        setupToString(innerArray, index);
+        System.out.println(this.toString()); // Temp line (?)
+    }
+
+    private void parseJson(String str, String word) {
         try (Reader JsonReader = new FileReader("data.json")) {
+            JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(JsonReader);
 
             JSONArray outerArray = (JSONArray) jsonObject.get("sentences");
-            JSONArray innerArray = (JSONArray) outerArray.get(0);
+            innerArray = (JSONArray) outerArray.get(0);
 
             if (!containsWord(str, word)) {
                 throw new IllegalStateException("Sentence does not contain word");
             }
-
-            int index = findIndex(str, word);
-
-            setupToString(innerArray, index);
-            System.out.println(this.toString()); // Temp line (?)
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();

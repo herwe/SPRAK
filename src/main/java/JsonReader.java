@@ -33,7 +33,7 @@ public class JsonReader {
      * Set ups innerArray to contain all the JSON-information.
      *
      * @param str The given sentence.
-     * @param word The given word parsed from the sentence.
+     * @param word The given word to be checked for in the sentence.
      */
     private void parseJson(String str, String word) {
         try (Reader JsonReader = new FileReader("data.json")) {
@@ -86,10 +86,10 @@ public class JsonReader {
     }
 
     /**
-     * Assign instance variable the current states from the given word.
+     * Assigns instance variable the current states from the given word.
      *
      * @param innerArray array containing information about all the JSON objects.
-     * @param arrayIndex index where the current word is located at as an JSON object.
+     * @param arrayIndex index where the current word is located at as an JSON object in the innerArray.
      */
     private void setupToString(JSONArray innerArray, int arrayIndex) {
         JSONObject obj = (JSONObject) innerArray.get(arrayIndex);

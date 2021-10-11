@@ -26,7 +26,7 @@ public class JsonWord {
         parseJson(str, word);
         int index = findIndex(str, word);
         setupToString(innerArray, index);
-        System.out.println(this.toString()); // Temp line (?)
+        //System.out.println(this.toString()); // Temp line
     }
 
     /**

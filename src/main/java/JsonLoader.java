@@ -1,6 +1,6 @@
 public class JsonLoader {
-    public static void start(String str, String word) {
+    public JsonWord start(String str, String word) {
         new JsonTagger(str);
-        new JsonWord(str, word);
+        return new JsonWord(str, word);
     }
 }

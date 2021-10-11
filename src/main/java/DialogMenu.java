@@ -22,6 +22,7 @@ public class DialogMenu {
                     break;
                 case 1:
                     //Spela
+                    userDialog.start();
                     break;
                 case 2:
                     //Hur spelar man?
@@ -65,11 +66,6 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        Wordlist wordlist = new Wordlist();
-        for (String targetWord:wordlist.getSentences().keySet()) {
-            JsonLoader.start(wordlist.getSentences().get(targetWord), targetWord);
-        }
-
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();
     }

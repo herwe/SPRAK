@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JsonReader {
+public class JsonWord {
     private String word_form;
     private String lemma;
     private String pos_tag;
@@ -18,7 +18,7 @@ public class JsonReader {
     private Object[] features_values = null;
     private JSONArray innerArray = null;
 
-    public JsonReader(String str, String word) {
+    public JsonWord(String str, String word) {
         word = word.toLowerCase();
         str = str.toLowerCase();
         str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters

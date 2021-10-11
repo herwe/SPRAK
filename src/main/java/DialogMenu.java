@@ -9,7 +9,6 @@ public class DialogMenu {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
                     "2. Hur spelar man?" + "\n" +
-                    "3. Lägg till ord" + "\n" +
                     "0. Avsluta");
             switch (numericInput(allowedInput)) {
                 case -1:
@@ -24,9 +23,9 @@ public class DialogMenu {
                     break;
                 case 2:
                     //Hur spelar man?
-                    break;
-                case 3:
-                    //Lägg till ord
+                    System.out.println("Välkommen till hängagubbe - grammatik" + "\n" +
+                            "Istället för att fråga om bokstäver så frågar du om ordegenskaper. " + "\n" +
+                            "Ett tips är att börja med att fråga om vilken ordklass det är, för då kan du sedan börja fråga om egenskaperna." + "\n");
                     break;
             }
         }
@@ -36,7 +35,7 @@ public class DialogMenu {
      * Asks user for input and validates it.
      *
      * @param allowedInput Specifies valid input.
-     * @return -1 for invalid choice. Returns inputted number if it is allowedInput.
+     * @return -1 for invalid choice. Returns inputted number if it is in allowedInput.
      */
     private int numericInput(Integer[] allowedInput) {
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +53,7 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        JsonLoader.start("Nu hoppas jag att allt funkar även med versaler i ordet!", "ordet");  // Oracle
+        JsonLoader.start("Nu hoppas jag att allt funkar även med versaler i ordet!", "hoppas");  // Oracle
 
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();

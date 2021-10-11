@@ -135,4 +135,24 @@ public class JsonWord {
 
         return stringBuilder.toString();
     }
+
+    public String getWord_form() {
+        return word_form;
+    }
+
+    public String getLemma() {
+        return lemma;
+    }
+
+    public String getPos_tag() {
+        return pos_tag;
+    }
+
+    public Object[] getFeatures_keys() {
+        return features_keys;
+    }
+
+    public Object[] getFeatures_values() {
+        return features_values;
+    }
 }

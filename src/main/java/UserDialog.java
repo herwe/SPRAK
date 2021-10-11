@@ -19,12 +19,15 @@ public class UserDialog {
     }
 
     public void start() {
-        System.out.println("Hej! Låt mig komma på ett ord...");
+        System.out.println("Hej!");
+        System.out.println("");
+        System.out.println("Du kan också fråga vilka nyckelord jag kan genom att fråga om nyckelord!");
+        System.out.println("Låt mig komma på ett ord...");
         selectSecretWord();
         System.out.println(secretWord.getWord_form()); //TODO: Remove
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
-        System.out.println("Du kan också fråga vilka nyckelord jag kan genom att fråga om nyckelord!");
+
         dialogLoop();
     }
 
@@ -49,6 +52,7 @@ public class UserDialog {
     }
 
     private String handleStringInput() {
+        System.out.print("> ");
         String input = scanner.nextLine().toLowerCase();
         String inputtedKeyword = null;
         for (String keyword : wordsToTags.keySet()) {

@@ -13,4 +13,8 @@ public class UserDialog {
         wordsToTags.put("genus", "gender");
         //wordsToTags.put("", "");
     }
+
+    public Map<String, String> getWordsToTags() {
+        return wordsToTags;
+    }
 }

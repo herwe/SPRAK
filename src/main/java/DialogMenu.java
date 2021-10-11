@@ -53,7 +53,11 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        JsonLoader.start("Nu hoppas jag att allt funkar även med versaler i ordet!", "hoppas");  // Oracle
+        Wordlist wordlist = new Wordlist();
+        for (int i = 0; i < 3; i++) {
+            JsonLoader.start(wordlist.getSentences().get(wordlist.getWords().get(i)), wordlist.getWords().get(i));
+        }
+
 
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();

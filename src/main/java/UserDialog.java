@@ -1,8 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class UserDialog {
-    private Map<String, String> wordsToTags = new HashMap<>();
+    private Map<String, String> wordsToTags = new TreeMap<>();
+    private Scanner scanner = new Scanner(System.in);
 
     public UserDialog() {
         wordsToTags.put("Ordklass", "pos_tag");
@@ -11,7 +14,13 @@ public class UserDialog {
         wordsToTags.put("Numerus", "number");
         wordsToTags.put("Bestämdhet", "definite");
         wordsToTags.put("Genus", "gender");
-        //wordsToTags.put("", "");
+        wordsToTags.put("Längd", "length");
+        wordsToTags.put("Första bokstav", "first_letter");
+
+    }
+
+    public void start() {
+
     }
 
     public Map<String, String> getWordsToTags() {

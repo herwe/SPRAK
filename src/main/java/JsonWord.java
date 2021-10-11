@@ -150,6 +150,9 @@ public class JsonWord {
 
     public Map<String, String> getFeatures() {
         Map<String, String> features = new HashMap<>();
+        features.put("word_form", word_form);
+        features.put("lemma", lemma);
+        features.put("pos_tag", pos_tag);
         for (int i = 0; i < features_keys.length; i++) {
             features.put(features_keys[i].toString(), features_values[i].toString());
         }

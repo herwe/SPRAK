@@ -1,6 +1,6 @@
 public class JsonLoader {
-    public JsonWord start(String str, String word) {
-        new JsonTagger(str);
-        return new JsonWord(str, word);
+    public JsonWord start(String sentence, String word) {
+        new JsonTagger(sentence);
+        return new JsonWord(sentence, word);
     }
 }

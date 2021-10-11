@@ -148,11 +148,12 @@ public class JsonWord {
         return pos_tag;
     }
 
-    public Object[] getFeatures_keys() {
-        return features_keys;
+    public Map<String, String> getFeatures() {
+        Map<String, String> features = new HashMap<>();
+        for (int i = 0; i < features_keys.length; i++) {
+            features.put(features_keys[i].toString(), features_values[i].toString());
+        }
+        return features;
     }
 
-    public Object[] getFeatures_values() {
-        return features_values;
-    }
 }

@@ -36,10 +36,11 @@ public class DialogMenu {
                 "Istället för att fråga om bokstäver så frågar du om ordegenskaper. " + "\n" +
                 "Botten väljer ett ord ur en mening och ditt uppdrag är att gissa vilket ord det är." + "\n" +
                 "Du får rätt om du lyckas gissa ordet eller dess lemma." + "\n" +
-                "Här är de nyckelord du kan fråga om: " + "\n");
+                "Här är de nyckelord du kan fråga om: ");
         for (String keyword : userDialog.getWordsToTags().keySet()) {
-            System.out.println("\t" + keyword + "\n");
+            System.out.println("\t" + keyword);
         }
+        System.out.println();
     }
 
     /**

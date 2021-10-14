@@ -5,6 +5,7 @@ public class UserDialog {
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
     private Wordlist wordlist = new Wordlist();
+    private Set<String> keywords = new HashSet<>();
 
     public UserDialog() {
         wordsToTags.put("ordklass", "pos_tag");
@@ -16,15 +17,22 @@ public class UserDialog {
         wordsToTags.put("längd", "length");
         wordsToTags.put("första bokstav", "first_letter");
 
+        keywords.add("ger upp");
+        keywords.add("nyckelord");
+        keywords.addAll(wordsToTags.keySet());
+
     }
 
     public void start() {
         System.out.println("Hej!");
-        System.out.println("");
-        System.out.println("Du kan också fråga vilka nyckelord jag kan genom att fråga om nyckelord!");
+        System.out.println("Du kan fråga vilka nyckelord jag kan genom att fråga mig om nyckelord!");
+        System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
         selectSecretWord();
-        System.out.println(secretWord.getWord_form()); //TODO: Remove
+        System.out.println(secretWord.toString()); //TODO: Remove
+        for (var pair : secretWord.getFeatures().entrySet()) {
+            System.out.println(pair.getKey()+" "+pair.getValue());
+        }
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
 
@@ -38,6 +46,14 @@ public class UserDialog {
             if (keyword == null) {
                 System.out.println("Det där förstod jag inte riktigt, försök igen.");
                 continue;
+            }
+            if (wordsToTags.containsKey(keyword)) {
+                String valueFromWord = secretWord.getFeatures().get(wordsToTags.get(keyword));
+                if (valueFromWord == null) {
+                    System.out.println("Ordet har inte det här egenskapen");
+                    continue;
+                }
+
             }
         } while (!exit);
     }
@@ -54,14 +70,12 @@ public class UserDialog {
     private String handleStringInput() {
         System.out.print("> ");
         String input = scanner.nextLine().toLowerCase();
-        String inputtedKeyword = null;
-        for (String keyword : wordsToTags.keySet()) {
+        for (String keyword : keywords) {
             if (input.contains(keyword)) {
-                inputtedKeyword = keyword;
-                break;
+                return keyword;
             }
         }
-        return inputtedKeyword;
+        return null;
     }
 
     public Map<String, String> getWordsToTags() {

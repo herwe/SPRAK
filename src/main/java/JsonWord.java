@@ -156,7 +156,7 @@ public class JsonWord {
         features.put("first_letter", String.valueOf(word_form.charAt(0)));
         features.put("length", String.valueOf(word_form.length()));
         for (int i = 0; i < features_keys.length; i++) {
-            features.put(features_keys[i].toString(), features_values[i].toString());
+            features.put(features_keys[i].toString().toLowerCase(), features_values[i].toString().toLowerCase());
         }
         return features;
     }

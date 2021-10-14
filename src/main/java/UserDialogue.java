@@ -1,15 +1,15 @@
 import java.util.*;
 
-public class UserDialog {
+public class UserDialogue {
     private Map<String, String> wordsToTags = new TreeMap<>();
     private Map<String, String> responses = new HashMap<>();
     private Map<String, String> valueResponse = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
-    private Wordlist wordlist = new Wordlist();
+    private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
 
-    public UserDialog() {
+    public UserDialogue() {
         wordsToTags.put("ordklass", "pos_tag");
         wordsToTags.put("kasus", "case");
         wordsToTags.put("komparation", "degree");

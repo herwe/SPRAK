@@ -1,8 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DialogMenu {
-    UserDialog userDialog = new UserDialog();
+public class DialogueMenu {
+    UserDialogue userDialogue = new UserDialogue();
 
     private void menuLoop() {
         boolean exit = false;
@@ -22,7 +22,7 @@ public class DialogMenu {
                     break;
                 case 1:
                     //Spela
-                    userDialog.start();
+                    userDialogue.start();
                     break;
                 case 2:
                     //Hur spelar man?
@@ -38,7 +38,7 @@ public class DialogMenu {
                 "Botten väljer ett ord ur en mening och ditt uppdrag är att gissa vilket ord det är." + "\n" +
                 "Du får rätt om du lyckas gissa ordet eller dess lemma." + "\n" +
                 "Här är de nyckelord du kan fråga om: ");
-        for (String keyword : userDialog.getWordsToTags().keySet()) {
+        for (String keyword : userDialogue.getWordsToTags().keySet()) {
             System.out.println("\t" + keyword);
         }
         System.out.println();
@@ -66,8 +66,8 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        DialogMenu dialogMenu = new DialogMenu();
-        dialogMenu.menuLoop();
+        DialogueMenu dialogueMenu = new DialogueMenu();
+        dialogueMenu.menuLoop();
     }
 
 }

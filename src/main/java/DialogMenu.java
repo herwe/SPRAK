@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DialogMenu {
+    UserDialog userDialog = new UserDialog();
+
     private void menuLoop() {
         boolean exit = false;
         Integer[] allowedInput = {1, 2, 3, 0};
@@ -20,15 +22,26 @@ public class DialogMenu {
                     break;
                 case 1:
                     //Spela
+                    userDialog.start();
                     break;
                 case 2:
                     //Hur spelar man?
-                    System.out.println("Välkommen till hängagubbe - grammatik" + "\n" +
-                            "Istället för att fråga om bokstäver så frågar du om ordegenskaper. " + "\n" +
-                            "Ett tips är att börja med att fråga om vilken ordklass det är, för då kan du sedan börja fråga om egenskaperna." + "\n");
+                    printHowTo();
                     break;
             }
         }
+    }
+
+    private void printHowTo() {
+        System.out.println("Välkommen till hängagubbe - grammatik" + "\n" +
+                "Istället för att fråga om bokstäver så frågar du om ordegenskaper. " + "\n" +
+                "Botten väljer ett ord ur en mening och ditt uppdrag är att gissa vilket ord det är." + "\n" +
+                "Du får rätt om du lyckas gissa ordet eller dess lemma." + "\n" +
+                "Här är de nyckelord du kan fråga om: ");
+        for (String keyword : userDialog.getWordsToTags().keySet()) {
+            System.out.println("\t" + keyword);
+        }
+        System.out.println();
     }
 
     /**
@@ -53,12 +66,6 @@ public class DialogMenu {
     }
 
     public static void main(String[] args) {
-        Wordlist wordlist = new Wordlist();
-        for (int i = 0; i < 3; i++) {
-            JsonLoader.start(wordlist.getSentences().get(wordlist.getWords().get(i)), wordlist.getWords().get(i));
-        }
-
-
         DialogMenu dialogMenu = new DialogMenu();
         dialogMenu.menuLoop();
     }

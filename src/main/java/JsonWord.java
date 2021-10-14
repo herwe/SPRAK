@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JsonReader {
+public class JsonWord {
     private String word_form;
     private String lemma;
     private String pos_tag;
@@ -18,7 +18,7 @@ public class JsonReader {
     private Object[] features_values = null;
     private JSONArray innerArray = null;
 
-    public JsonReader(String str, String word) {
+    public JsonWord(String str, String word) {
         word = word.toLowerCase();
         str = str.toLowerCase();
         str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
@@ -26,7 +26,7 @@ public class JsonReader {
         parseJson(str, word);
         int index = findIndex(str, word);
         setupToString(innerArray, index);
-        System.out.println(this.toString()); // Temp line (?)
+        //System.out.println(this.toString()); // Temp line
     }
 
     /**
@@ -135,4 +135,30 @@ public class JsonReader {
 
         return stringBuilder.toString();
     }
+
+    public String getWord_form() {
+        return word_form;
+    }
+
+    public String getLemma() {
+        return lemma;
+    }
+
+    public String getPos_tag() {
+        return pos_tag;
+    }
+
+    public Map<String, String> getFeatures() {
+        Map<String, String> features = new HashMap<>();
+        features.put("word_form", word_form);
+        features.put("lemma", lemma);
+        features.put("pos_tag", pos_tag);
+        features.put("first_letter", String.valueOf(word_form.charAt(0)));
+        features.put("length", String.valueOf(word_form.length()));
+        for (int i = 0; i < features_keys.length; i++) {
+            features.put(features_keys[i].toString().toLowerCase(), features_values[i].toString().toLowerCase());
+        }
+        return features;
+    }
+
 }

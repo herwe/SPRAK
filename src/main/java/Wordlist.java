@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Wordlist {
 
-    private ArrayList<String> words = new ArrayList<>();
-    private Map<String, String> sentences = new HashMap<>();
+    private Map<String, String> sentences = new TreeMap<>();
 
     public Wordlist() {
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("Sentences.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("Sentences.txt"))) {
             String line = bufferedReader.readLine();
 
             while (line != null) {
@@ -26,22 +26,13 @@ public class Wordlist {
         }
     }
 
-    private void split(String line){
+    private void split(String line) {
         var splitLine = line.split(",");
         splitLine[1] = splitLine[1].trim();
         sentences.put(splitLine[1], splitLine[0]);
-        words.add(splitLine[1]);
-    }
-
-    public ArrayList<String> getWords() {
-        return words;
     }
 
     public Map<String, String> getSentences() {
         return sentences;
-    }
-
-    public static void main(String[] args) {
-        new Wordlist();
     }
 }

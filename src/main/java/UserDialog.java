@@ -3,6 +3,7 @@ import java.util.*;
 public class UserDialog {
     private Map<String, String> wordsToTags = new TreeMap<>();
     private Map<String, String> responses = new HashMap<>();
+    private Map<String, String> valueResponse = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
     private Wordlist wordlist = new Wordlist();
@@ -37,6 +38,33 @@ public class UserDialog {
         responses.put("modus","Moduset är ");
         responses.put("tempus","Tempuset är ");
 
+        valueResponse.put("adj","adjektiv");
+        valueResponse.put("verb","verb");
+        valueResponse.put("noun","substantiv");
+
+        valueResponse.put("plur","plural");
+        valueResponse.put("sing","singular");
+
+        valueResponse.put("pos","positiv");
+
+        valueResponse.put("ind","obestämd form");
+        valueResponse.put("def","bestämd form");
+
+        valueResponse.put("ind","indikativt");
+
+        valueResponse.put("past","preteritum");
+        valueResponse.put("pres","presens");
+        valueResponse.put("fut","futurum");
+
+        valueResponse.put("com","reale");
+        valueResponse.put("neut","neutrum");
+
+        valueResponse.put("fin","finit");
+        valueResponse.put("inf","infinit");
+        valueResponse.put("sup","supinum");
+        valueResponse.put("part","particip");
+
+
 
         for (int i = 0; i < wordlist.getSentences().size(); i++) {
             for (var pair : selectSecretWord(i).getFeatures().entrySet()) {
@@ -51,7 +79,7 @@ public class UserDialog {
         System.out.println("Du kan fråga vilka nyckelord jag kan genom att fråga mig om nyckelord!");
         System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
-        secretWord = selectSecretWord();
+        secretWord = selectSecretWord(1);
         System.out.println(secretWord.toString());
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
@@ -87,7 +115,11 @@ public class UserDialog {
                     System.out.println("Ordet har inte det här egenskapen");
                     continue;
                 }
-                System.out.println(responses.get(keyword) + valueFromWord);
+                String value = valueFromWord;
+                if (valueResponse.containsKey(valueFromWord)){
+                    value = valueResponse.get(valueFromWord);
+                }
+                System.out.println(responses.get(keyword) + value);
             }
         } while (true);
     }

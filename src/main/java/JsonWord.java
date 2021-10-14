@@ -149,7 +149,7 @@ public class JsonWord {
     }
 
     public Map<String, String> getFeatures() {
-        Map<String, String> features = new HashMap<>();
+        Map<String, String> features = new TreeMap<>();
         features.put("word_form", word_form);
         features.put("lemma", lemma);
         features.put("pos_tag", pos_tag);

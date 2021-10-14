@@ -50,7 +50,7 @@ public class UserDialog {
         valueResponse.put("ind","obestämd form");
         valueResponse.put("def","bestämd form");
 
-        valueResponse.put("ind","indikativt");
+        //valueResponse.put("ind","indikativt");
 
         valueResponse.put("past","preteritum");
         valueResponse.put("pres","presens");
@@ -66,12 +66,12 @@ public class UserDialog {
 
 
 
-        for (int i = 0; i < wordlist.getSentences().size(); i++) {
-            for (var pair : selectSecretWord(i).getFeatures().entrySet()) {
-                System.out.println(pair.getKey()+" "+pair.getValue());
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < wordlist.getSentences().size(); i++) {
+//            for (var pair : selectSecretWord(i).getFeatures().entrySet()) {
+//                System.out.println(pair.getKey()+" "+pair.getValue());
+//            }
+//            System.out.println();
+//        }
     }
 
     public void start() {
@@ -79,7 +79,7 @@ public class UserDialog {
         System.out.println("Du kan fråga vilka nyckelord jag kan genom att fråga mig om nyckelord!");
         System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
-        secretWord = selectSecretWord(1);
+        secretWord = selectSecretWord();
         System.out.println(secretWord.toString());
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");

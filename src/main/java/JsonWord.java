@@ -18,13 +18,13 @@ public class JsonWord {
     private Object[] features_values = null;
     private JSONArray innerArray = null;
 
-    public JsonWord(String str, String word) {
+    public JsonWord(String sentence, String word) {
         word = word.toLowerCase();
-        str = str.toLowerCase();
-        str = str.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
+        sentence = sentence.toLowerCase();
+        sentence = sentence.replaceAll("[\\!.\\,\\?]", ""); // Strips the String of !?., characters
 
-        parseJson(str, word);
-        int index = findIndex(str, word);
+        parseJson(sentence, word);
+        int index = findIndex(sentence, word);
         setupToString(innerArray, index);
         //System.out.println(this.toString()); // Temp line
     }
@@ -149,7 +149,7 @@ public class JsonWord {
     }
 
     public Map<String, String> getFeatures() {
-        Map<String, String> features = new HashMap<>();
+        Map<String, String> features = new TreeMap<>();
         features.put("word_form", word_form);
         features.put("lemma", lemma);
         features.put("pos_tag", pos_tag);

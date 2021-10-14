@@ -5,7 +5,7 @@ public class UserDialog {
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
     private Wordlist wordlist = new Wordlist();
-    private Set<String> keywords = new HashSet<>();
+    private Set<String> keywords = new TreeSet<>();
 
     public UserDialog() {
         wordsToTags.put("ordklass", "pos_tag");
@@ -29,10 +29,10 @@ public class UserDialog {
         System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
         selectSecretWord();
-        System.out.println(secretWord.toString()); //TODO: Remove
-        for (var pair : secretWord.getFeatures().entrySet()) {
-            System.out.println(pair.getKey()+" "+pair.getValue());
-        }
+//        System.out.println(secretWord.toString());
+//        for (var pair : secretWord.getFeatures().entrySet()) {
+//            System.out.println(pair.getKey() + " " + pair.getValue());
+//        }
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
 
@@ -40,12 +40,22 @@ public class UserDialog {
     }
 
     private void dialogLoop() {
-        boolean exit = false;
+
         do {
             String keyword = handleStringInput();
             if (keyword == null) {
                 System.out.println("Det där förstod jag inte riktigt, försök igen.");
                 continue;
+            }
+            if (keyword.equalsIgnoreCase("ger upp")) {
+                System.out.println("Ordet var: " + secretWord.getWord_form());
+                break;
+            }
+            if (keyword.equalsIgnoreCase("nyckelord")){
+                System.out.println("Nyckelorden är: ");
+                for (String key: keywords) {
+                    System.out.println("\t"+key);
+                }
             }
             if (wordsToTags.containsKey(keyword)) {
                 String valueFromWord = secretWord.getFeatures().get(wordsToTags.get(keyword));
@@ -53,9 +63,9 @@ public class UserDialog {
                     System.out.println("Ordet har inte det här egenskapen");
                     continue;
                 }
-
+                System.out.println(keyword + " är " + valueFromWord);
             }
-        } while (!exit);
+        } while (true);
     }
 
     private void selectSecretWord() {

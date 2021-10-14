@@ -16,6 +16,9 @@ public class UserDialog {
         wordsToTags.put("genus", "gender");
         wordsToTags.put("längd", "length");
         wordsToTags.put("första bokstav", "first_letter");
+        wordsToTags.put("form", "verbform");
+        wordsToTags.put("modus", "mood");
+        wordsToTags.put("tempus", "tense");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
@@ -29,10 +32,7 @@ public class UserDialog {
         System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
         selectSecretWord();
-//        System.out.println(secretWord.toString());
-//        for (var pair : secretWord.getFeatures().entrySet()) {
-//            System.out.println(pair.getKey() + " " + pair.getValue());
-//        }
+        System.out.println(secretWord.toString());
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
 
@@ -46,6 +46,10 @@ public class UserDialog {
             if (keyword == null) {
                 System.out.println("Det där förstod jag inte riktigt, försök igen.");
                 continue;
+            }
+            if (keyword.equalsIgnoreCase(secretWord.getWord_form())){
+                System.out.println("Rätt!");
+                break;
             }
             if (keyword.equalsIgnoreCase("ger upp")) {
                 System.out.println("Ordet var: " + secretWord.getWord_form());
@@ -81,6 +85,9 @@ public class UserDialog {
         System.out.print("> ");
         String input = scanner.nextLine().toLowerCase();
         for (String keyword : keywords) {
+            if (input.contains(secretWord.getWord_form())||input.contains(secretWord.getLemma())){
+                return secretWord.getWord_form();
+            }
             if (input.contains(keyword)) {
                 return keyword;
             }

@@ -12,6 +12,7 @@ public class UserDialogue {
     private JsonWord secretWord;
     private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
+    private int secretWordNr = 0;
 
     public UserDialogue() {
         wordsToTags = readFromFile("txt/WordsToTags.txt");
@@ -52,7 +53,13 @@ public class UserDialogue {
         System.out.println("Du kan fråga vilka nyckelord jag kan genom att fråga mig om nyckelord!");
         System.out.println("Du kan också ge upp genom att skriva \"Jag ger upp\"");
         System.out.println("Låt mig komma på ett ord...");
-        secretWord = selectSecretWord();
+
+        secretWord = selectSecretWord(secretWordNr);
+        secretWordNr++;
+        if (secretWordNr>4){
+            secretWordNr = 0;
+        }
+
         System.out.println("Nu har jag ett, börja gissa!");
         System.out.println("Exempel: Vilken ordklass är det?");
 

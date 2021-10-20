@@ -10,7 +10,7 @@ public class MenuDialogue {
 
     private void menuLoop() {
         boolean exit = false;
-        Integer[] allowedInput = {1, 2, 3, 0};
+        Integer[] allowedInput = {1, 2, 0};
         while (!exit) {
             System.out.println("* * * H Ä N G A G U B B E * * *" + "\n" +
                     "1. Spela" + "\n" +
@@ -20,10 +20,6 @@ public class MenuDialogue {
                 case -1:
                     System.out.println("Ogiltigt alternativ, försök igen.");
                     break;
-                case 0:
-                    //Avsluta
-                    exit = true;
-                    break;
                 case 1:
                     //Spela
                     userDialogue.start();
@@ -31,6 +27,10 @@ public class MenuDialogue {
                 case 2:
                     //Hur spelar man?
                     printHowTo();
+                    break;
+                case 0:
+                    //Avsluta
+                    exit = true;
                     break;
             }
         }

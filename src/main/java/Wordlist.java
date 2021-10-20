@@ -12,7 +12,7 @@ public class Wordlist {
     private Map<String, String> sentences = new TreeMap<>();
 
     public Wordlist() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("Sentences.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("txt/Sentences.txt"))) {
             String line = bufferedReader.readLine();
 
             while (line != null) {

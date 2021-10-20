@@ -14,9 +14,9 @@ public class UserDialog {
     private Set<String> keywords = new TreeSet<>();
 
     public UserDialog() {
-        wordsToTags = readFromFile("WordsToTags.txt");
-        responses = readFromFile("Responses.txt");
-        valueResponse = readFromFile("ValueResponses.txt");
+        wordsToTags = readFromFile("txt/WordsToTags.txt");
+        responses = readFromFile("txt/Responses.txt");
+        valueResponse = readFromFile("txt/ValueResponses.txt");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");

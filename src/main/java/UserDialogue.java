@@ -14,7 +14,7 @@ public class UserDialogue {
     private Set<String> keywords = new TreeSet<>();
     private int secretWordNr = 1;
 
-    public UserDialogue() {
+    public UserDialogue() throws Exception {
         wordsToTags = readFromFile("txt/WordsToTags.txt");
         responses = readFromFile("txt/Responses.txt");
         valueResponse = readFromFile("txt/ValueResponses.txt");
@@ -25,7 +25,7 @@ public class UserDialogue {
         keywords.addAll(wordsToTags.keySet());
     }
 
-    private Map<String, String> readFromFile(String fileName) {
+    private Map<String, String> readFromFile(String fileName) throws Exception {
         Map<String, String> result = new TreeMap<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
@@ -35,10 +35,8 @@ public class UserDialogue {
                 result.put(pair[0], pair[1]);
                 line = bufferedReader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new Exception("File error!");
         }
         return result;
     }

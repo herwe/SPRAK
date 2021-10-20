@@ -2,7 +2,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DialogueMenu {
-    UserDialogue userDialogue = new UserDialogue();
+    UserDialogue userDialogue;
+
+    public DialogueMenu() throws Exception {
+        userDialogue = new UserDialogue();
+    }
 
     private void menuLoop() {
         boolean exit = false;
@@ -66,8 +70,12 @@ public class DialogueMenu {
     }
 
     public static void main(String[] args) {
-        DialogueMenu dialogueMenu = new DialogueMenu();
-        dialogueMenu.menuLoop();
+        try {
+            DialogueMenu dialogueMenu = new DialogueMenu();
+            dialogueMenu.menuLoop();
+        } catch (Exception e) {
+            System.out.println("Kritiskt fel med inläsning av filer.");
+        }
     }
 
 }

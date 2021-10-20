@@ -8,9 +8,9 @@ public class UserDialogue {
     private Map<String, String> wordsToTags;
     private Map<String, String> responses;
     private Map<String, String> valueResponse;
+    private Map<String, String> sentences;
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
-    private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
     private int secretWordNr = 1;
 
@@ -18,6 +18,7 @@ public class UserDialogue {
         wordsToTags = readFromFile("txt/WordsToTags.txt");
         responses = readFromFile("txt/Responses.txt");
         valueResponse = readFromFile("txt/ValueResponses.txt");
+        sentences = readFromFile("txt/Sentences.txt");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
@@ -107,12 +108,12 @@ public class UserDialogue {
     }
 
     private JsonWord selectSecretWord() {
-        return selectSecretWord(new Random().nextInt(wordlist.getSentences().size()));
+        return selectSecretWord(new Random().nextInt(sentences.size()));
     }
 
     private JsonWord selectSecretWord(int n) {
-        String wordString = wordlist.getSentences().keySet().toArray()[n].toString();
-        return new JsonLoader().start(wordlist.getSentences().get(wordString), wordString);
+        String word = sentences.keySet().toArray()[n].toString();
+        return new JsonLoader().start(sentences.get(word), word);
     }
 
     private String handleStringInput() {

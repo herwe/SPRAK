@@ -1,10 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DialogueMenu {
+public class MenuDialogue {
     UserDialogue userDialogue;
 
-    public DialogueMenu() throws Exception {
+    public MenuDialogue() throws Exception {
         userDialogue = new UserDialogue();
     }
 
@@ -71,8 +71,8 @@ public class DialogueMenu {
 
     public static void main(String[] args) {
         try {
-            DialogueMenu dialogueMenu = new DialogueMenu();
-            dialogueMenu.menuLoop();
+            MenuDialogue menuDialogue = new MenuDialogue();
+            menuDialogue.menuLoop();
         } catch (Exception e) {
             System.out.println("Kritiskt fel med inläsning av filer: en eller flera filer saknas");
         }

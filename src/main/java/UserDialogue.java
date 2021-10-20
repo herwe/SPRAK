@@ -10,7 +10,7 @@ public class UserDialogue {
     private Map<String, String> valueResponse;
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
-    private Wordlist wordlist = new Wordlist();
+    private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
 
     public UserDialogue() {

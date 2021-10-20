@@ -7,11 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Wordlist {
+public class WordList {
 
     private Map<String, String> sentences = new TreeMap<>();
 
-    public Wordlist() {
+
+    public WordList() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("txt/Sentences.txt"))) {
             String line = bufferedReader.readLine();
 

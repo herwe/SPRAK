@@ -16,48 +16,30 @@ public class UserDialog {
     public UserDialog() {
 
         wordsToTags = readFromFile("WordsToTags.txt");
-
+        responses = readFromFile("Responses.txt");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
         keywords.addAll(wordsToTags.keySet());
 
-        responses.put("ordklass","Ordklassen är ");
-        responses.put("kasus","Kasuset är ");
-        responses.put("komparation","Komparationen är ");
-        responses.put("numerus","Numeruset är ");
-        responses.put("bestämdhet","Bestämdheten är ");
-        responses.put("genus","Genuset är ");
-        responses.put("längd","Längden på ordet är ");
-        responses.put("första bokstav","Första bokstaven är ");
-        responses.put("form","Verbformen är ");
-        responses.put("modus","Moduset är ");
-        responses.put("tempus","Tempuset är ");
 
-        valueResponse.put("adj","adjektiv");
-        valueResponse.put("verb","verb");
-        valueResponse.put("noun","substantiv");
-
-        valueResponse.put("plur","plural");
-        valueResponse.put("sing","singular");
-
-        valueResponse.put("pos","positiv");
-
-        valueResponse.put("ind","obestämd form");
-        valueResponse.put("def","bestämd form");
-
-        valueResponse.put("past","preteritum");
-        valueResponse.put("pres","presens");
-        valueResponse.put("fut","futurum");
-
-        valueResponse.put("com","reale");
-        valueResponse.put("neut","neutrum");
-
-        valueResponse.put("fin","finit");
-        valueResponse.put("inf","infinit");
-        valueResponse.put("sup","supinum");
-        valueResponse.put("part","particip");
-
+        valueResponse.put("adj", "adjektiv");
+        valueResponse.put("verb", "verb");
+        valueResponse.put("noun", "substantiv");
+        valueResponse.put("plur", "plural");
+        valueResponse.put("sing", "singular");
+        valueResponse.put("pos", "positiv");
+        valueResponse.put("ind", "obestämd form");
+        valueResponse.put("def", "bestämd form");
+        valueResponse.put("past", "preteritum");
+        valueResponse.put("pres", "presens");
+        valueResponse.put("fut", "futurum");
+        valueResponse.put("com", "reale");
+        valueResponse.put("neut", "neutrum");
+        valueResponse.put("fin", "finit");
+        valueResponse.put("inf", "infinit");
+        valueResponse.put("sup", "supinum");
+        valueResponse.put("part", "particip");
 
 
 //        for (int i = 0; i < wordlist.getSentences().size(); i++) {
@@ -68,8 +50,8 @@ public class UserDialog {
 //        }
     }
 
-    private Map<String,String> readFromFile(String fileName) {
-        Map<String,String> result = new TreeMap<>();
+    private Map<String, String> readFromFile(String fileName) {
+        Map<String, String> result = new TreeMap<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
 
@@ -112,7 +94,7 @@ public class UserDialog {
                 System.out.println("Det där förstod jag inte riktigt, försök igen.");
                 continue;
             }
-            if (keyword.equalsIgnoreCase("fusk")){
+            if (keyword.equalsIgnoreCase("fusk")) {
                 System.out.println(secretWord.toString());
             }
             if (keyword.equalsIgnoreCase(secretWord.getWord_form())) {
@@ -136,10 +118,10 @@ public class UserDialog {
                     continue;
                 }
                 String value = valueFromWord;
-                if (valueResponse.containsKey(valueFromWord)){
+                if (valueResponse.containsKey(valueFromWord)) {
                     value = valueResponse.get(valueFromWord);
                 }
-                System.out.println(responses.get(keyword) + value);
+                System.out.println(responses.get(keyword) + " " + value);
             }
         } while (true);
     }
@@ -159,7 +141,7 @@ public class UserDialog {
         if (input.contains(secretWord.getWord_form()) || input.contains(secretWord.getLemma())) {
             return secretWord.getWord_form();
         }
-        if (input.equalsIgnoreCase("fusk")){
+        if (input.equalsIgnoreCase("fusk")) {
             return "fusk";
         }
         for (String keyword : keywords) {

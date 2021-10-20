@@ -1,77 +1,50 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class UserDialogue {
-    private Map<String, String> wordsToTags = new TreeMap<>();
-    private Map<String, String> responses = new HashMap<>();
-    private Map<String, String> valueResponse = new HashMap<>();
+    private Map<String, String> wordsToTags;
+    private Map<String, String> responses;
+    private Map<String, String> valueResponse;
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
     private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
 
     public UserDialogue() {
-        wordsToTags.put("ordklass", "pos_tag");
-        wordsToTags.put("kasus", "case");
-        wordsToTags.put("komparation", "degree");
-        wordsToTags.put("numerus", "number");
-        wordsToTags.put("bestämdhet", "definite");
-        wordsToTags.put("genus", "gender");
-        wordsToTags.put("längd", "length");
-        wordsToTags.put("första bokstav", "first_letter");
-        wordsToTags.put("form", "verbform");
-        wordsToTags.put("modus", "mood");
-        wordsToTags.put("tempus", "tense");
+        wordsToTags = readFromFile("txt/WordsToTags.txt");
+        responses = readFromFile("txt/Responses.txt");
+        valueResponse = readFromFile("txt/ValueResponses.txt");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
         keywords.addAll(wordsToTags.keySet());
+    }
 
-        responses.put("ordklass","Ordklassen är ");
-        responses.put("kasus","Kasuset är ");
-        responses.put("komparation","Komparationen är ");
-        responses.put("numerus","Numeruset är ");
-        responses.put("bestämdhet","Bestämdheten är ");
-        responses.put("genus","Genuset är ");
-        responses.put("längd","Längden på ordet är ");
-        responses.put("första bokstav","Första bokstaven är ");
-        responses.put("form","Verbformen är ");
-        responses.put("modus","Moduset är ");
-        responses.put("tempus","Tempuset är ");
+    private Map<String, String> readFromFile(String fileName) {
+        Map<String, String> result = new TreeMap<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String line = bufferedReader.readLine();
 
-        valueResponse.put("adj","adjektiv");
-        valueResponse.put("verb","verb");
-        valueResponse.put("noun","substantiv");
+            while (line != null) {
+                String[] pair = split(line);
+                result.put(pair[0], pair[1]);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-        valueResponse.put("plur","plural");
-        valueResponse.put("sing","singular");
-
-        valueResponse.put("pos","positiv");
-
-        valueResponse.put("ind","obestämd form");
-        valueResponse.put("def","bestämd form");
-
-        //valueResponse.put("ind","indikativt");
-
-        valueResponse.put("past","preteritum");
-        valueResponse.put("pres","presens");
-        valueResponse.put("fut","futurum");
-
-        valueResponse.put("com","reale");
-        valueResponse.put("neut","neutrum");
-
-        valueResponse.put("fin","finit");
-        valueResponse.put("inf","infinit");
-        valueResponse.put("sup","supinum");
-        valueResponse.put("part","particip");
-
-
-
-//        for (int i = 0; i < wordlist.getSentences().size(); i++) {
-//            for (var pair : selectSecretWord(i).getFeatures().entrySet()) {
-//                System.out.println(pair.getKey()+" "+pair.getValue());
-//            }
-//            System.out.println();
-//        }
+    private String[] split(String line) {
+        var pair = line.split(",");
+        pair[1] = pair[1].trim();
+        return pair;
     }
 
     public void start() {
@@ -94,7 +67,7 @@ public class UserDialogue {
                 System.out.println("Det där förstod jag inte riktigt, försök igen.");
                 continue;
             }
-            if (keyword.equalsIgnoreCase("fusk")){
+            if (keyword.equalsIgnoreCase("fusk")) {
                 System.out.println(secretWord.toString());
             }
             if (keyword.equalsIgnoreCase(secretWord.getWord_form())) {
@@ -118,10 +91,10 @@ public class UserDialogue {
                     continue;
                 }
                 String value = valueFromWord;
-                if (valueResponse.containsKey(valueFromWord)){
+                if (valueResponse.containsKey(valueFromWord)) {
                     value = valueResponse.get(valueFromWord);
                 }
-                System.out.println(responses.get(keyword) + value);
+                System.out.println(responses.get(keyword) + " " + value);
             }
         } while (true);
     }
@@ -141,7 +114,7 @@ public class UserDialogue {
         if (input.contains(secretWord.getWord_form()) || input.contains(secretWord.getLemma())) {
             return secretWord.getWord_form();
         }
-        if (input.equalsIgnoreCase("fusk")){
+        if (input.equalsIgnoreCase("fusk")) {
             return "fusk";
         }
         for (String keyword : keywords) {
@@ -155,9 +128,4 @@ public class UserDialogue {
     public Map<String, String> getWordsToTags() {
         return wordsToTags;
     }
-
-   /* Wordlist wordlist = new Wordlist();
-        for (String targetWord:wordlist.getSentences().keySet()) {
-        JsonLoader.start(wordlist.getSentences().get(targetWord), targetWord);
-    }*/
 }

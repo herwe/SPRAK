@@ -1,0 +1,11 @@
+ordklass,Ordklassen är
+kasus,Kasuset är
+komparation,Komparationen är
+numerus,Numeruset är
+bestämdhet,Bestämdheten är
+genus,Genuset är
+längd,Längden på ordet är
+första bokstav,Första bokstaven är
+form,Verbformen är
+modus,Moduset är
+tempus,Tempuset är

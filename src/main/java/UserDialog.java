@@ -5,16 +5,15 @@ import java.io.IOException;
 import java.util.*;
 
 public class UserDialog {
-    private Map<String, String> wordsToTags = new TreeMap<>();
-    private Map<String, String> responses = new HashMap<>();
-    private Map<String, String> valueResponse = new HashMap<>();
+    private Map<String, String> wordsToTags;
+    private Map<String, String> responses;
+    private Map<String, String> valueResponse;
     private Scanner scanner = new Scanner(System.in);
     private JsonWord secretWord;
     private Wordlist wordlist = new Wordlist();
     private Set<String> keywords = new TreeSet<>();
 
     public UserDialog() {
-
         wordsToTags = readFromFile("WordsToTags.txt");
         responses = readFromFile("Responses.txt");
         valueResponse = readFromFile("ValueResponses.txt");
@@ -22,13 +21,6 @@ public class UserDialog {
         keywords.add("ger upp");
         keywords.add("nyckelord");
         keywords.addAll(wordsToTags.keySet());
-
-//        for (int i = 0; i < wordlist.getSentences().size(); i++) {
-//            for (var pair : selectSecretWord(i).getFeatures().entrySet()) {
-//                System.out.println(pair.getKey()+" "+pair.getValue());
-//            }
-//            System.out.println();
-//        }
     }
 
     private Map<String, String> readFromFile(String fileName) {
@@ -136,9 +128,4 @@ public class UserDialog {
     public Map<String, String> getWordsToTags() {
         return wordsToTags;
     }
-
-   /* Wordlist wordlist = new Wordlist();
-        for (String targetWord:wordlist.getSentences().keySet()) {
-        JsonLoader.start(wordlist.getSentences().get(targetWord), targetWord);
-    }*/
 }

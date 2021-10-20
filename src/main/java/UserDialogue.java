@@ -12,7 +12,7 @@ public class UserDialogue {
     private JsonWord secretWord;
     private WordList wordlist = new WordList();
     private Set<String> keywords = new TreeSet<>();
-    private int secretWordNr = 0;
+    private int secretWordNr = 1;
 
     public UserDialogue() {
         wordsToTags = readFromFile("txt/WordsToTags.txt");

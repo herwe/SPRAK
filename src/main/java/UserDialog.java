@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class UserDialog {
@@ -10,17 +14,21 @@ public class UserDialog {
     private Set<String> keywords = new TreeSet<>();
 
     public UserDialog() {
-        wordsToTags.put("ordklass", "pos_tag");
-        wordsToTags.put("kasus", "case");
-        wordsToTags.put("komparation", "degree");
-        wordsToTags.put("numerus", "number");
-        wordsToTags.put("bestämdhet", "definite");
-        wordsToTags.put("genus", "gender");
-        wordsToTags.put("längd", "length");
-        wordsToTags.put("första bokstav", "first_letter");
-        wordsToTags.put("form", "verbform");
-        wordsToTags.put("modus", "mood");
-        wordsToTags.put("tempus", "tense");
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("WordsToTags.txt"))) {
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                String[] pair = split(line);
+                wordsToTags.put(pair[0], pair[1]);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
@@ -72,6 +80,12 @@ public class UserDialog {
 //            }
 //            System.out.println();
 //        }
+    }
+
+    private String[] split(String line) {
+        var pair = line.split(",");
+        pair[1] = pair[1].trim();
+        return pair;
     }
 
     public void start() {

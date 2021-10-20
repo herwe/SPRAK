@@ -1,0 +1,11 @@
+ordklass, pos_tag
+kasus, case
+komparation, degree
+numerus, number
+bestämdhet, definite
+genus, gender
+längd, length
+första bokstav, first_letter
+form, verbform
+modus, mood
+tempus, tense

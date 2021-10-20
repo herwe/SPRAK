@@ -17,30 +17,11 @@ public class UserDialog {
 
         wordsToTags = readFromFile("WordsToTags.txt");
         responses = readFromFile("Responses.txt");
+        valueResponse = readFromFile("ValueResponses.txt");
 
         keywords.add("ger upp");
         keywords.add("nyckelord");
         keywords.addAll(wordsToTags.keySet());
-
-
-        valueResponse.put("adj", "adjektiv");
-        valueResponse.put("verb", "verb");
-        valueResponse.put("noun", "substantiv");
-        valueResponse.put("plur", "plural");
-        valueResponse.put("sing", "singular");
-        valueResponse.put("pos", "positiv");
-        valueResponse.put("ind", "obestämd form");
-        valueResponse.put("def", "bestämd form");
-        valueResponse.put("past", "preteritum");
-        valueResponse.put("pres", "presens");
-        valueResponse.put("fut", "futurum");
-        valueResponse.put("com", "reale");
-        valueResponse.put("neut", "neutrum");
-        valueResponse.put("fin", "finit");
-        valueResponse.put("inf", "infinit");
-        valueResponse.put("sup", "supinum");
-        valueResponse.put("part", "particip");
-
 
 //        for (int i = 0; i < wordlist.getSentences().size(); i++) {
 //            for (var pair : selectSecretWord(i).getFeatures().entrySet()) {

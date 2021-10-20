@@ -1,0 +1,17 @@
+adj, adjektiv
+verb, verb
+noun, substantiv
+plur, plural
+sing, singular
+pos, positiv
+ind, obestämd form
+def, bestämd form
+past, preteritum
+pres, presens
+fut, futurum
+com, reale
+neut, neutrum
+fin, finit
+inf, infinit
+sup, supinum
+part, particip

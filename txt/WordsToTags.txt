@@ -5,6 +5,7 @@ numerus, number
 bestämdhet, definite
 genus, gender
 längd, length
+långt, length
 första bokstav, first_letter
 form, verbform
 modus, mood

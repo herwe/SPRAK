@@ -5,6 +5,7 @@ numerus,Numeruset är
 bestämdhet,Bestämdheten är
 genus,Genuset är
 längd,Längden på ordet är
+långt,Längden på ordet är
 första bokstav,Första bokstaven är
 form,Verbformen är
 modus,Moduset är

@@ -74,7 +74,7 @@ public class DialogueMenu {
             DialogueMenu dialogueMenu = new DialogueMenu();
             dialogueMenu.menuLoop();
         } catch (Exception e) {
-            System.out.println("Kritiskt fel med inläsning av filer.");
+            System.out.println("Kritiskt fel med inläsning av filer: en eller flera filer saknas");
         }
     }
 

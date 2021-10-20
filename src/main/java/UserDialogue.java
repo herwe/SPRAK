@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class UserDialog {
+public class UserDialogue {
     private Map<String, String> wordsToTags;
     private Map<String, String> responses;
     private Map<String, String> valueResponse;
@@ -13,7 +13,7 @@ public class UserDialog {
     private Wordlist wordlist = new Wordlist();
     private Set<String> keywords = new TreeSet<>();
 
-    public UserDialog() {
+    public UserDialogue() {
         wordsToTags = readFromFile("txt/WordsToTags.txt");
         responses = readFromFile("txt/Responses.txt");
         valueResponse = readFromFile("txt/ValueResponses.txt");

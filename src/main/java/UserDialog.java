@@ -15,19 +15,7 @@ public class UserDialog {
 
     public UserDialog() {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("WordsToTags.txt"))) {
-            String line = bufferedReader.readLine();
-
-            while (line != null) {
-                String[] pair = split(line);
-                wordsToTags.put(pair[0], pair[1]);
-                line = bufferedReader.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        wordsToTags = readFromFile("WordsToTags.txt");
 
 
         keywords.add("ger upp");
@@ -58,8 +46,6 @@ public class UserDialog {
         valueResponse.put("ind","obestämd form");
         valueResponse.put("def","bestämd form");
 
-        //valueResponse.put("ind","indikativt");
-
         valueResponse.put("past","preteritum");
         valueResponse.put("pres","presens");
         valueResponse.put("fut","futurum");
@@ -80,6 +66,24 @@ public class UserDialog {
 //            }
 //            System.out.println();
 //        }
+    }
+
+    private Map<String,String> readFromFile(String fileName) {
+        Map<String,String> result = new TreeMap<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                String[] pair = split(line);
+                result.put(pair[0], pair[1]);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     private String[] split(String line) {
